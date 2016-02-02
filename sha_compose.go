@@ -7,14 +7,37 @@ import (
 	"strings"
 )
 
-func ShaInCompose(params map[string]string, secret string) string {
+func shaInCompose(params map[string]string, secret string) string {
 	normalizedParams := normalizeParams(params, shaInAllowedParams)
 	return shaCompose(normalizedParams, secret)
 }
 
-func ShaOutCompose(params map[string]string, secret string) string {
+func shaOutCompose(params map[string]string, secret string) string {
 	normalizedParams := normalizeParams(params, shaOutAllowedParams)
 	return shaCompose(normalizedParams, secret)
+}
+
+func shaCompose(params map[string]string, secret string) string {
+	keys := make([]string, len(params))
+
+	keyCounter := 0
+
+	for k := range params {
+		keys[keyCounter] = k
+		keyCounter++
+	}
+
+	sort.Strings(keys)
+
+	sign := ""
+
+	for _, key := range keys {
+		sign += key + "=" + params[key] + secret
+	}
+
+	sum := sha1.Sum([]byte(sign))
+
+	return strings.ToUpper(hex.EncodeToString(sum[:]))
 }
 
 // Make keys to uppercase and sort keys alphabetically, also intersect with allowed keys
@@ -41,29 +64,6 @@ func normalizeParams(params map[string]string, allowed []string) map[string]stri
 	}
 
 	return values
-}
-
-func shaCompose(params map[string]string, secret string) string {
-	keys := make([]string, len(params))
-
-	keyCounter := 0
-
-	for k := range params {
-		keys[keyCounter] = k
-		keyCounter++
-	}
-
-	sort.Strings(keys)
-
-	sign := ""
-
-	for _, key := range keys {
-		sign += key + "=" + params[key] + secret
-	}
-
-	sum := sha1.Sum([]byte(sign))
-
-	return strings.ToUpper(hex.EncodeToString(sum[:]))
 }
 
 var shaInAllowedParams = []string{

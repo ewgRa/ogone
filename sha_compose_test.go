@@ -16,7 +16,7 @@ func TestShaInCompose(t *testing.T) {
 		"PSPID":       "MyPSPID",
 	}
 
-	sign := ShaInCompose(params, "Mysecretsig1875!?")
+	sign := shaInCompose(params, "Mysecretsig1875!?")
 
 	if sign != expected {
 		t.Fatalf("ShaIn compose failed, expected %s, got %s", expected, sign)
@@ -40,9 +40,24 @@ func TestShaOutCompose(t *testing.T) {
 		"STATUS":      "9",
 	}
 
-	sign := ShaOutCompose(params, "Mysecretsig1875!?")
+	sign := shaOutCompose(params, "Mysecretsig1875!?")
 
 	if sign != expected {
 		t.Fatalf("ShaOut compose failed, expected %s, got %s", expected, sign)
+	}
+}
+
+func BenchmarkShaInCompose(b *testing.B) {
+	params := map[string]string{
+		"lANGUAGE":    "en_US",
+		"NOT_ALLOWED": "foo",
+		"AMOUnT":      "1500",
+		"CURReNCY":    "EUR",
+		"ORDERID":     "1234",
+		"PSPID":       "MyPSPID",
+	}
+
+	for n := 0; n < b.N; n++ {
+		shaInCompose(params, "Mysecretsig1875!?")
 	}
 }
