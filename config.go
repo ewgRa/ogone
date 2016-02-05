@@ -1,9 +1,9 @@
 package ogone
 
 type Config struct {
-	pspId string
-	userId string
-	password string
+	pspId        string
+	userId       string
+	password     string
 	inPassPhrase string
-	sandbox bool
+	sandbox      bool
 }

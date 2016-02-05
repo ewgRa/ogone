@@ -1,41 +1,39 @@
 package ogone
 
-const operationReserve = "RES"
-
 type DirectLinkRequest struct {
-	data map[string]string
+	*BaseRequest
 }
 
 func NewDirectLinkRequest() *DirectLinkRequest {
-	return &DirectLinkRequest{data: make(map[string]string)}
+	return &DirectLinkRequest{NewBaseRequest()}
 }
 
-func (dlr *DirectLinkRequest) SetReserveOperation() *DirectLinkRequest{
-	dlr.SetOperation(operationReserve)
-	return dlr
+func (r *DirectLinkRequest) SetReserveOperation() *DirectLinkRequest {
+	r.SetOperation("RES")
+	return r
 }
 
-func (dlr *DirectLinkRequest) SetOperation(operation string) *DirectLinkRequest{
-	dlr.data["OPERATION"] = operation
-	return dlr
+func (r *DirectLinkRequest) SetOperation(operation string) *DirectLinkRequest {
+	r.data["OPERATION"] = operation
+	return r
 }
 
-func (dlr *DirectLinkRequest) SetCurrency(currency string) *DirectLinkRequest{
-	dlr.data["CURRENCY"] = currency
-	return dlr
+func (r *DirectLinkRequest) SetCurrency(currency string) *DirectLinkRequest {
+	r.data["CURRENCY"] = currency
+	return r
 }
 
-func (dlr *DirectLinkRequest) SetAlias(alias string) *DirectLinkRequest{
-	dlr.data["ALIAS"] = alias
-	return dlr
+func (r *DirectLinkRequest) SetAlias(alias string) *DirectLinkRequest {
+	r.data["ALIAS"] = alias
+	return r
 }
 
-func (dlr *DirectLinkRequest) SetOrderId(orderId string) *DirectLinkRequest{
-	dlr.data["ORDERID"] = orderId
-	return dlr
+func (r *DirectLinkRequest) SetOrderId(orderId string) *DirectLinkRequest {
+	r.data["ORDERID"] = orderId
+	return r
 }
 
-func (dlr *DirectLinkRequest) SetAmount(amount string) *DirectLinkRequest{
-	dlr.data["AMOUNT"] = amount
-	return dlr
+func (r *DirectLinkRequest) SetAmount(amount string) *DirectLinkRequest {
+	r.data["AMOUNT"] = amount
+	return r
 }
