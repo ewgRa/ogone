@@ -51,11 +51,15 @@ func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayUrl string)
 	}
 
 	if res.StatusCode != http.StatusOK {
-
+		return "", errors.New("Wrong http answer")
 	}
 
 	content, err := ioutil.ReadAll(res.Body)
 	res.Body.Close()
+
+	if err != nil {
+		return "", err
+	}
 
 	return string(content), nil
 }

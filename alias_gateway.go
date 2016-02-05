@@ -41,7 +41,11 @@ func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayUrl string) (*AliasRe
 		return nil, err
 	}
 
-	redirectUrl, _ := res.Location()
+	redirectUrl, err := res.Location()
 
-	return &AliasResponse{redirectUrl: redirectUrl}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return NewAliasResponse(redirectUrl), nil
 }

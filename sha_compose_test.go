@@ -4,7 +4,25 @@ import (
 	"testing"
 )
 
-// FIXME XXX: TestShaInAliasCompose
+func TestShaInAliasCompose(t *testing.T) {
+	expected := "F4CC376CD7A834D997B91598FA747825A238BE0A"
+
+	params := map[string]string{
+		"lANGUAGE":    "en_US",
+		"CARDNO":      "DO_NOT_INCLUDE_ME",
+		"NOT_ALLOWED": "foo",
+		"AMOUnT":      "1500",
+		"CURReNCY":    "EUR",
+		"ORDERID":     "1234",
+		"PSPID":       "MyPSPID",
+	}
+
+	sign := shaInAliasCompose(params, "Mysecretsig1875!?")
+
+	if sign != expected {
+		t.Fatalf("ShaIn compose failed, expected %s, got %s", expected, sign)
+	}
+}
 
 func TestShaInCompose(t *testing.T) {
 	expected := "F4CC376CD7A834D997B91598FA747825A238BE0A"

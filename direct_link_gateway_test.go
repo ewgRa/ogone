@@ -9,40 +9,49 @@ import (
 )
 
 func TestDirectLinkSend(t *testing.T) {
-	a := NewAliasGateway()
-
 	ar := NewAliasRequest()
 
-	ar.SetAcceptUrl("http://testsuc.com")
-	ar.SetExceptionUrl("http://tesat.com")
+	orderId := "GOLANGTEST" + time.Now().Format("20060102150405_") + strconv.Itoa(rand.Intn(100000))
 
-	order := "GOLANGTEST" + time.Now().Format("20060102150405_") + strconv.Itoa(rand.Intn(100000))
+	ar.
+		SetAcceptUrl("https://github.com/ewgRa/ogone/success").
+		SetExceptionUrl("https://github.com/ewgRa/ogone/exception").
+		SetOrderId(orderId).
+		SetCardNumber("4111111111111111").
+		SetCardHolderName("Sökolov Evgenii").
+		SetCvc("123").
+		SetCardExpireMonth("01").
+		SetCardExpireYear(string(strconv.Itoa(time.Now().Year() + 1)))
 
-	ar.SetPspId("ewgraogone")
-	ar.SetOrderId(order)
-	ar.SetCardNumber("4111111111111111")
-	ar.SetCardHolderName("Sökolov Evgenii")
-	ar.SetCvc("123")
-	ar.SetCardExpireMonth("01")
-	ar.SetCardExpireYear(string(strconv.Itoa(time.Now().Year() + 1)))
+	ag := NewAliasGateway()
 
-	ar.Sign("qwdqwoidj29812d9")
-	aresp, _ := a.SandboxSend(ar)
+	ar.
+		SetPspId("ewgraogone").
+		Sign("qwdqwoidj29812d9")
 
-	dl := NewDirectLinkGateway()
+	aResp, _ := ag.SandboxSend(ar)
+
+	// FIXME XXX: assert response success
 
 	dlr := NewDirectLinkRequest()
 
-	dlr.SetPspId("ewgraogone")
-	dlr.SetUserId("ewgragolang")
-	dlr.SetPassword("123123aa")
-	dlr.SetAlias(aresp.Alias())
-	dlr.SetAmount("100")
-	dlr.SetReserveOperation()
-	dlr.SetCurrency("EUR")
-	dlr.SetOrderId(order)
+	dlr.
+		SetAlias(aResp.Alias()).
+		SetAmount("100").
+		SetReserveOperation().
+		SetCurrency("EUR").
+		SetOrderId(orderId)
 
-	dlr.Sign("qwdqwoidj29812d9")
-	resp, _ := dl.SandboxSend(dlr)
+	dlg := NewDirectLinkGateway()
+
+	dlr.
+		SetPspId("ewgraogone").
+		SetUserId("ewgragolang").
+		SetPassword("123123aa").
+		Sign("qwdqwoidj29812d9")
+
+	resp, _ := dlg.SandboxSend(dlr)
+
+	// FIXME XXX: check status
 	fmt.Println(resp)
 }
