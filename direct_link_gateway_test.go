@@ -43,6 +43,6 @@ func TestDirectLinkSend(t *testing.T) {
 	dlr.SetOrderId(order)
 
 	dlr.Sign("qwdqwoidj29812d9")
-	resp := dl.Send(dlr)
+	resp, _ := dl.Send(dlr)
 	fmt.Println(resp)
 }

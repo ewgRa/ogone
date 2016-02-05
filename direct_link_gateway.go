@@ -23,8 +23,7 @@ func (g *DirectLinkGateway) SandboxUrl() string {
 	return "https://secure.ogone.com/ncol/test/orderdirect_utf8.asp"
 }
 
-// FIXME XXX: errors
-func (g *DirectLinkGateway) Send(r *DirectLinkRequest) string {
+func (g *DirectLinkGateway) Send(r *DirectLinkRequest) (string, error) {
 
 	values := url.Values{}
 
@@ -37,7 +36,7 @@ func (g *DirectLinkGateway) Send(r *DirectLinkRequest) string {
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	if err != nil {
-		return ""
+		return "", err
 	}
 
 	client := &http.Client{CheckRedirect: func(req *http.Request, via []*http.Request) error {
@@ -48,7 +47,7 @@ func (g *DirectLinkGateway) Send(r *DirectLinkRequest) string {
 	res, err := client.Do(req)
 
 	if err != nil {
-		return ""
+		return "", err
 	}
 
 	if res.StatusCode != http.StatusOK {
@@ -58,5 +57,5 @@ func (g *DirectLinkGateway) Send(r *DirectLinkRequest) string {
 	content, err := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 
-	return string(content)
+	return string(content), nil
 }
