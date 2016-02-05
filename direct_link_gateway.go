@@ -24,6 +24,7 @@ func (g *DirectLinkGateway) SandboxUrl() string {
 	return "https://secure.ogone.com/ncol/test/orderdirect_utf8.asp"
 }
 
+// FIXME XXX: errors
 func (g *DirectLinkGateway) Send(r *DirectLinkRequest) string {
 	data := make(map[string]string, len(r.Data())+3)
 
