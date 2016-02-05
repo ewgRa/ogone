@@ -396,6 +396,7 @@ var shaInAllowedParams = []string{
 	"WITHROOT",
 }
 
+// FIXME XXX: copypaste fom shaInAllowedParams
 var shaInAliasAllowedParams = []string{
 	"ACCEPTANCE",
 	"ACCEPTURL",

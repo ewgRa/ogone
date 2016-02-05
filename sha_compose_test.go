@@ -4,6 +4,8 @@ import (
 	"testing"
 )
 
+// FIXME XXX: TestShaInAliasCompose
+
 func TestShaInCompose(t *testing.T) {
 	expected := "F4CC376CD7A834D997B91598FA747825A238BE0A"
 

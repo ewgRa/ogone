@@ -39,13 +39,7 @@ func (g *AliasGateway) Send(r *AliasRequest) (*AliasResponse, error) {
 
 	values.Add("SHASIGN", shaInAliasCompose(data, g.Config().inPassPhrase))
 
-	url := g.Url()
-
-	if g.Config().sandbox {
-		url = g.SandboxUrl()
-	}
-
-	req, err := http.NewRequest("GET", url+"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("GET", r.Url()+"?"+values.Encode(), bytes.NewBufferString(""))
 
 	if err != nil {
 		return nil, err

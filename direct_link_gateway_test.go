@@ -12,10 +12,9 @@ func TestDirectLinkSend(t *testing.T) {
 	a := NewAliasGateway(&Config{
 		pspId:        "ewgraogone",
 		inPassPhrase: "qwdqwoidj29812d9",
-		sandbox:      true,
 	})
 
-	ar := NewAliasRequest()
+	ar := NewAliasRequest(a.SandboxUrl())
 
 	ar.SetAcceptUrl("http://testsuc.com")
 	ar.SetExceptionUrl("http://tesat.com")
@@ -36,10 +35,9 @@ func TestDirectLinkSend(t *testing.T) {
 		userId:       "ewgragolang",
 		password:     "123123aa",
 		inPassPhrase: "qwdqwoidj29812d9",
-		sandbox:      true,
 	})
 
-	dlr := NewDirectLinkRequest()
+	dlr := NewDirectLinkRequest(dl.SandboxUrl())
 
 	dlr.SetAlias(aresp.Alias())
 	dlr.SetAmount("100")

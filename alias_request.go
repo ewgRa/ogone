@@ -4,8 +4,8 @@ type AliasRequest struct {
 	*BaseRequest
 }
 
-func NewAliasRequest() *AliasRequest {
-	return &AliasRequest{NewBaseRequest()}
+func NewAliasRequest(url string) *AliasRequest {
+	return &AliasRequest{NewBaseRequest(url)}
 }
 
 func (r *AliasRequest) SetAcceptUrl(url string) *AliasRequest {

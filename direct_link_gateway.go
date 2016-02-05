@@ -43,13 +43,7 @@ func (g *DirectLinkGateway) Send(r *DirectLinkRequest) string {
 
 	values.Add("SHASIGN", shaInCompose(data, g.Config().inPassPhrase))
 
-	url := g.Url()
-
-	if g.Config().sandbox {
-		url = g.SandboxUrl()
-	}
-
-	req, err := http.NewRequest("POST", url+"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("POST", r.Url()+"?"+values.Encode(), bytes.NewBufferString(""))
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 

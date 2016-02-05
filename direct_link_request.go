@@ -4,8 +4,8 @@ type DirectLinkRequest struct {
 	*BaseRequest
 }
 
-func NewDirectLinkRequest() *DirectLinkRequest {
-	return &DirectLinkRequest{NewBaseRequest()}
+func NewDirectLinkRequest(url string) *DirectLinkRequest {
+	return &DirectLinkRequest{NewBaseRequest(url)}
 }
 
 func (r *DirectLinkRequest) SetReserveOperation() *DirectLinkRequest {
