@@ -9,11 +9,10 @@ import (
 )
 
 type DirectLinkGateway struct {
-	*BaseGateway
 }
 
-func NewDirectLinkGateway(c *Config) *DirectLinkGateway {
-	return &DirectLinkGateway{&BaseGateway{c: c}}
+func NewDirectLinkGateway() *DirectLinkGateway {
+	return &DirectLinkGateway{}
 }
 
 func (g *DirectLinkGateway) Url() string {
@@ -26,23 +25,12 @@ func (g *DirectLinkGateway) SandboxUrl() string {
 
 // FIXME XXX: errors
 func (g *DirectLinkGateway) Send(r *DirectLinkRequest) string {
-	data := make(map[string]string, len(r.Data())+3)
-
-	for k, v := range r.Data() {
-		data[k] = v
-	}
-
-	data["PSPID"] = g.Config().pspId
-	data["USERID"] = g.Config().userId
-	data["PSWD"] = g.Config().password
 
 	values := url.Values{}
 
-	for k, v := range data {
+	for k, v := range r.Data() {
 		values.Add(k, v)
 	}
-
-	values.Add("SHASIGN", shaInCompose(data, g.Config().inPassPhrase))
 
 	req, err := http.NewRequest("POST", r.Url()+"?"+values.Encode(), bytes.NewBufferString(""))
 

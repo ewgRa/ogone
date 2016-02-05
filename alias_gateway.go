@@ -7,11 +7,10 @@ import (
 )
 
 type AliasGateway struct {
-	*BaseGateway
 }
 
-func NewAliasGateway(c *Config) *AliasGateway {
-	return &AliasGateway{&BaseGateway{c: c}}
+func NewAliasGateway() *AliasGateway {
+	return &AliasGateway{}
 }
 
 func (g *AliasGateway) Url() string {
@@ -23,21 +22,12 @@ func (g *AliasGateway) SandboxUrl() string {
 }
 
 func (g *AliasGateway) Send(r *AliasRequest) (*AliasResponse, error) {
-	data := make(map[string]string, len(r.Data())+1)
-
-	for k, v := range r.Data() {
-		data[k] = v
-	}
-
-	data["PSPID"] = g.Config().pspId
 
 	values := url.Values{}
 
-	for k, v := range data {
+	for k, v := range r.Data() {
 		values.Add(k, v)
 	}
-
-	values.Add("SHASIGN", shaInAliasCompose(data, g.Config().inPassPhrase))
 
 	req, err := http.NewRequest("GET", r.Url()+"?"+values.Encode(), bytes.NewBufferString(""))
 

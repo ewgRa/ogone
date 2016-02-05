@@ -8,6 +8,11 @@ func NewAliasRequest(url string) *AliasRequest {
 	return &AliasRequest{NewBaseRequest(url)}
 }
 
+func (r *AliasRequest) SetPspId(pspId string) *AliasRequest {
+	r.data["PSPID"] = pspId
+	return r
+}
+
 func (r *AliasRequest) SetAcceptUrl(url string) *AliasRequest {
 	r.data["ACCEPTURL"] = url
 	return r
@@ -45,5 +50,10 @@ func (r *AliasRequest) SetCardExpireMonth(month string) *AliasRequest {
 
 func (r *AliasRequest) SetCardExpireYear(year string) *AliasRequest {
 	r.data["ECOM_CARDINFO_EXPDATE_YEAR"] = year
+	return r
+}
+
+func (r *AliasRequest) Sign(passPhrase string) *AliasRequest {
+	r.data["SHASIGN"] = shaInAliasCompose(r.data, passPhrase)
 	return r
 }

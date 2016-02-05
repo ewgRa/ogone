@@ -22,11 +22,3 @@ func (r *BaseRequest) Url() string {
 func NewBaseRequest(url string) *BaseRequest {
 	return &BaseRequest{data: make(map[string]string), url: url}
 }
-
-type BaseGateway struct {
-	c *Config
-}
-
-func (g *BaseGateway) Config() *Config {
-	return g.c
-}
