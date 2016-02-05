@@ -4,8 +4,8 @@ type AliasRequest struct {
 	*BaseRequest
 }
 
-func NewAliasRequest(url string) *AliasRequest {
-	return &AliasRequest{NewBaseRequest(url)}
+func NewAliasRequest() *AliasRequest {
+	return &AliasRequest{NewBaseRequest()}
 }
 
 func (r *AliasRequest) SetPspId(pspId string) *AliasRequest {

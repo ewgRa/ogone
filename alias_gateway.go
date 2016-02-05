@@ -13,15 +13,15 @@ func NewAliasGateway() *AliasGateway {
 	return &AliasGateway{}
 }
 
-func (g *AliasGateway) Url() string {
-	return "https://secure.ogone.com/ncol/prod/alias_gateway_utf8.asp"
-}
-
-func (g *AliasGateway) SandboxUrl() string {
-	return "https://secure.ogone.com/ncol/test/alias_gateway_utf8.asp"
+func (g *AliasGateway) SandboxSend(r *AliasRequest) (*AliasResponse, error) {
+	return g.sendRequest(r, "https://secure.ogone.com/ncol/test/alias_gateway_utf8.asp")
 }
 
 func (g *AliasGateway) Send(r *AliasRequest) (*AliasResponse, error) {
+	return g.sendRequest(r, "https://secure.ogone.com/ncol/prod/alias_gateway_utf8.asp")
+}
+
+func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayUrl string) (*AliasResponse, error) {
 
 	values := url.Values{}
 
@@ -29,7 +29,7 @@ func (g *AliasGateway) Send(r *AliasRequest) (*AliasResponse, error) {
 		values.Add(k, v)
 	}
 
-	req, err := http.NewRequest("GET", r.Url()+"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("GET", gatewayUrl+"?"+values.Encode(), bytes.NewBufferString(""))
 
 	if err != nil {
 		return nil, err

@@ -15,15 +15,15 @@ func NewDirectLinkGateway() *DirectLinkGateway {
 	return &DirectLinkGateway{}
 }
 
-func (g *DirectLinkGateway) Url() string {
-	return "https://secure.ogone.com/ncol/prod/orderdirect_utf8.asp"
-}
-
-func (g *DirectLinkGateway) SandboxUrl() string {
-	return "https://secure.ogone.com/ncol/test/orderdirect_utf8.asp"
-}
-
 func (g *DirectLinkGateway) Send(r *DirectLinkRequest) (string, error) {
+	return g.sendRequest(r, "https://secure.ogone.com/ncol/prod/orderdirect_utf8.asp")
+}
+
+func (g *DirectLinkGateway) SandboxSend(r *DirectLinkRequest) (string, error) {
+	return g.sendRequest(r, "https://secure.ogone.com/ncol/test/orderdirect_utf8.asp")
+}
+
+func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayUrl string) (string, error) {
 
 	values := url.Values{}
 
@@ -31,7 +31,7 @@ func (g *DirectLinkGateway) Send(r *DirectLinkRequest) (string, error) {
 		values.Add(k, v)
 	}
 
-	req, err := http.NewRequest("POST", r.Url()+"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("POST", gatewayUrl+"?"+values.Encode(), bytes.NewBufferString(""))
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 

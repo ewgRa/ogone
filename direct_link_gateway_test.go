@@ -11,7 +11,7 @@ import (
 func TestDirectLinkSend(t *testing.T) {
 	a := NewAliasGateway()
 
-	ar := NewAliasRequest(a.SandboxUrl())
+	ar := NewAliasRequest()
 
 	ar.SetAcceptUrl("http://testsuc.com")
 	ar.SetExceptionUrl("http://tesat.com")
@@ -27,11 +27,11 @@ func TestDirectLinkSend(t *testing.T) {
 	ar.SetCardExpireYear(string(strconv.Itoa(time.Now().Year() + 1)))
 
 	ar.Sign("qwdqwoidj29812d9")
-	aresp, _ := a.Send(ar)
+	aresp, _ := a.SandboxSend(ar)
 
 	dl := NewDirectLinkGateway()
 
-	dlr := NewDirectLinkRequest(dl.SandboxUrl())
+	dlr := NewDirectLinkRequest()
 
 	dlr.SetPspId("ewgraogone")
 	dlr.SetUserId("ewgragolang")
@@ -43,6 +43,6 @@ func TestDirectLinkSend(t *testing.T) {
 	dlr.SetOrderId(order)
 
 	dlr.Sign("qwdqwoidj29812d9")
-	resp, _ := dl.Send(dlr)
+	resp, _ := dl.SandboxSend(dlr)
 	fmt.Println(resp)
 }

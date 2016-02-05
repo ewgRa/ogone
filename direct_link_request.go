@@ -4,8 +4,8 @@ type DirectLinkRequest struct {
 	*BaseRequest
 }
 
-func NewDirectLinkRequest(url string) *DirectLinkRequest {
-	return &DirectLinkRequest{NewBaseRequest(url)}
+func NewDirectLinkRequest() *DirectLinkRequest {
+	return &DirectLinkRequest{NewBaseRequest()}
 }
 
 func (r *DirectLinkRequest) SetPspId(pspId string) *DirectLinkRequest {
