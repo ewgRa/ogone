@@ -18,7 +18,7 @@ Library version | Package URL
 $ go get gopkg.in/ewgra/ogone.v1
 ```
 
-And then mport it with this import path:
+And then import it in your code:
 
 ```go
 import "gopkg.in/ewgra/ogone.v1"
