@@ -13,4 +13,5 @@ env:
 
 script:
   - go test -coverprofile=coverage.txt -covermode=atomic
-  - echo "Check that files formatted by go fmt" && sh files/go-fmt-changed-files.sh && git diff --exit-code --quiet
+  - git diff HEAD^ --name-status | grep "^D" -v | sed 's/^.\t//g' | grep "\.go$" | while read FILE; do go fmt $FILE; done
+  - git diff --exit-code --quiet
