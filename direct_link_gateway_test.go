@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func TestDirectLinkSend(t *testing.T) {
+func TestDirectLink(t *testing.T) {
 	ar := NewAliasRequest()
 
 	orderId := "GOLANGTEST" + time.Now().Format("20060102150405_") + strconv.Itoa(rand.Intn(100000))
@@ -31,6 +31,10 @@ func TestDirectLinkSend(t *testing.T) {
 
 	aResp, _ := ag.SandboxSend(ar)
 
+	if !aResp.CheckSign("qwdqwoidj29812d9") {
+		t.Fatalf("Check Alias response signature failed")
+	}
+
 	// FIXME XXX: assert response success
 
 	dlr := NewDirectLinkRequest()
@@ -50,8 +54,8 @@ func TestDirectLinkSend(t *testing.T) {
 		SetPassword("123123aa").
 		Sign("qwdqwoidj29812d9")
 
-	resp, _ := dlg.SandboxSend(dlr)
+	dlResp, _ := dlg.SandboxSend(dlr)
 
 	// FIXME XXX: check status
-	fmt.Println(resp)
+	fmt.Println(dlResp)
 }

@@ -22,6 +22,11 @@ func shaOutCompose(params map[string]string, secret string) string {
 	return shaCompose(normalizedParams, secret)
 }
 
+func shaOutAliasCompose(params map[string]string, secret string) string {
+	normalizedParams := normalizeParams(params, shaOutAliasAllowedParams)
+	return shaCompose(normalizedParams, secret)
+}
+
 func shaCompose(params map[string]string, secret string) string {
 	keys := make([]string, len(params))
 
@@ -399,6 +404,23 @@ var shaInAllowedParams = append(
 	"UCAF_PAYMENT_CARD_EXPDATE_YEAR",
 	"UCAF_PAYMENT_CARD_NUMBER",
 )
+
+var shaOutAliasAllowedParams = []string{
+	"ALIAS",
+	"BIC",
+	"BRAND",
+	"CARDNO",
+	"CN",
+	"CVC",
+	"ED",
+	"NCERROR",
+	"NCERRORCARDNO",
+	"NCERRORCN",
+	"NCERRORCVC",
+	"NCERRORED",
+	"ORDERID",
+	"STATUS",
+}
 
 var shaOutAllowedParams = []string{
 	"AAVADDRESS",

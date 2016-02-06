@@ -67,6 +67,23 @@ func TestShaOutCompose(t *testing.T) {
 	}
 }
 
+func TestShaOutAliasCompose(t *testing.T) {
+	expected := "F92877D291FF14C3473326C3C92544EE69510F70"
+
+	params := map[string]string{
+		"ALIAS":      "15",
+		"CVC":        "XXXXXXXX1111",
+		"STATUS":     "1",
+		"ACCEPTANCE": "MUST_BE_IGNORED",
+	}
+
+	sign := shaOutAliasCompose(params, "Mysecretsig1875!?")
+
+	if sign != expected {
+		t.Fatalf("ShaOut compose failed, expected %s, got %s", expected, sign)
+	}
+}
+
 func BenchmarkShaInCompose(b *testing.B) {
 	params := map[string]string{
 		"lANGUAGE":    "en_US",
