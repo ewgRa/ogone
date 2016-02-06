@@ -6,7 +6,7 @@ This library is an [Ingenico Payment Services](https://payment-services.ingenico
 [![Build Status](https://travis-ci.org/ewgRa/ogone.svg?branch=master)](https://travis-ci.org/ewgRa/ogone)
 [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/ewgra/ogone/master/LICENSE)
 [![GoReportCard](http://goreportcard.com/badge/ewgra/ogone)](http://goreportcard.com/report/ewgra/ogone)
-[![codecov.io](https://codecov.io/github/ewgra/ogone/coverage.svg?branch=master)](https://codecov.io/github/ewgra/ogone?branch=master)
+[![codecov.io](https://codecov.io/github/ewgRa/ogone/coverage.svg?branch=master)](https://codecov.io/github/ewgRa/ogone?branch=master)
 
 ## Releases
 
