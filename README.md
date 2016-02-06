@@ -4,6 +4,8 @@ This library is an [Ingenico Payment Services](https://payment-services.ingenico
 [Go](http://www.golang.org/) programming language.
 
 [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/ewgra/ogone/master/LICENSE)
+[![GoReportCard](http://goreportcard.com/badge/ewgra/ogone)](http://goreportcard.com/report/ewgra/ogone)
+[![codecov.io](https://codecov.io/github/ewgra/ogone/coverage.svg?branch=master)](https://codecov.io/github/ewgra/ogone?branch=master)
 
 ## Releases
 
