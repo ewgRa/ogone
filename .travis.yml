@@ -13,5 +13,4 @@ env:
 
 script:
   - go test -coverprofile=coverage.txt -covermode=atomic
-  - git diff HEAD^ --name-status | grep "^D" -v | sed 's/^.\t//g' | grep "\.go$" | while read FILE; do go fmt $FILE; done
-  - git diff --exit-code --quiet
+  - gofmt -l . | read && echo "Code differs from gofmt's style" 1>&2 && exit 1 || true
