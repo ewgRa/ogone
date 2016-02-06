@@ -1,16 +1,27 @@
 sudo: false
+
 dist: trusty
+
 language: go
+
 go:
   - 1.5.3
   - 1.6rc1
   - tip
+
 env:
   global:
     - GO15VENDOREXPERIMENT=1
   allow_failures:
     - go: tip
 
+branches:
+  only:
+    - "master"
+
 script:
   - go test -coverprofile=coverage.txt -covermode=atomic
   - gofmt -l . | read && echo "Code differs from gofmt's style" 1>&2 && exit 1 || true
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
