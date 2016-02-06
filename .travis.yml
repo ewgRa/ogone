@@ -1,0 +1,18 @@
+sudo: false
+dist: trusty
+language: go
+go:
+  - 1.5.3
+  - 1.6rc1
+  - tip
+env:
+  global:
+    - GO15VENDOREXPERIMENT=1
+  allow_failures:
+    - go: tip
+
+script:
+  - go test -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
