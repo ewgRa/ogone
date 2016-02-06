@@ -111,3 +111,5 @@ Open issue or pull requests
 
 MIT-LICENSE. See [LICENSE](http://ewgra.mit-license.org/)
 or the LICENSE file provided in the repository for details.
+
+check push build
