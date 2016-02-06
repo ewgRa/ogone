@@ -2,7 +2,7 @@ package ogone
 
 import (
 	"bytes"
-"net/http"
+	"net/http"
 	"net/url"
 )
 
