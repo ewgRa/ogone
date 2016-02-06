@@ -14,3 +14,6 @@ env:
 script:
   - go test -coverprofile=coverage.txt -covermode=atomic
   - gofmt -l . | read && echo "Code differs from gofmt's style" 1>&2 && exit 1 || true
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
