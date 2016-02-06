@@ -13,6 +13,4 @@ env:
 
 script:
   - go test -coverprofile=coverage.txt -covermode=atomic
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - echo "Check that files formatted by go fmt" && sh files/go-fmt-changed-files.sh && git diff --exit-code --quiet
