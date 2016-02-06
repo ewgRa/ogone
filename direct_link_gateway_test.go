@@ -1,7 +1,6 @@
 package ogone
 
 import (
-	"fmt"
 	"math/rand"
 	"strconv"
 	"testing"
@@ -35,7 +34,9 @@ func TestDirectLink(t *testing.T) {
 		t.Fatalf("Check Alias response signature failed")
 	}
 
-	// FIXME XXX: assert response success
+	if !aResp.IsOk() {
+		t.Fatalf("Status is not okey at Alias response")
+	}
 
 	dlr := NewDirectLinkRequest()
 
@@ -56,6 +57,7 @@ func TestDirectLink(t *testing.T) {
 
 	dlResp, _ := dlg.SandboxSend(dlr)
 
-	// FIXME XXX: check status
-	fmt.Println(dlResp)
+	if !dlResp.IsAuthorised() {
+		t.Fatalf("Status is not authorized at DirectLink response")
+	}
 }

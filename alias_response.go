@@ -18,6 +18,10 @@ func (r *AliasResponse) Sign() string {
 	return r.redirectUrl.Query().Get("SHASign")
 }
 
+func (r *AliasResponse) IsOk() bool {
+	return r.redirectUrl.Query().Get("status") == "0"
+}
+
 func (r *AliasResponse) CheckSign(passPhrase string) bool {
 	params := make(map[string]string)
 

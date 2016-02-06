@@ -18,6 +18,10 @@ func NewDirectLinkResponse(xmlContent string) (*DirectLinkResponse, error) {
 	return r, nil
 }
 
+func (r *DirectLinkResponse) IsAuthorised() bool {
+	return r.data["STATUS"] == "5"
+}
+
 func (e *DirectLinkResponse) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	var nodes []*DirectLinkResponse
 
