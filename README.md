@@ -9,7 +9,7 @@ This library is an [Ingenico Payment Services](https://payment-services.ingenico
 
 Library version | Package URL
 ----------------------|------------------
-1.x                   | [`gopkg.in/ewgra/ogone.v1`](https://gopkg.in/ewgra/ogone.v1) ([source](https://github.com/ewgra/ogone/tree/v1)
+1.x                   | [`gopkg.in/ewgra/ogone.v1`](https://gopkg.in/ewgra/ogone.v1)
 
 **Installation:**
 
@@ -18,7 +18,7 @@ Library version | Package URL
 $ go get gopkg.in/ewgra/ogone.v1
 ```
 
-You then import it with this import path:
+And then mport it with this import path:
 
 ```go
 import "gopkg.in/ewgra/ogone.v1"
@@ -46,11 +46,13 @@ import "gopkg.in/ewgra/ogone.v1"
 		SetPassword("123123aa").
 		Sign("qwdqwoidj29812d9")
 
-	dlResp, _ := dlg.SandboxSend(dlr)
+	dlResp, _ := dlg.Send(dlr) // Use SandboxSend for send it to sandbox
 
 	if !dlResp.IsAuthorised() {
 		// .. STATUS in response is not Authorized
 	}
+
+	// Request was authorized successfully
 
 ```
 
@@ -75,7 +77,7 @@ import "gopkg.in/ewgra/ogone.v1"
 		SetPspId("ewgraogone").
 		Sign("qwdqwoidj29812d9")
 
-	aResp, _ := ag.SandboxSend(ar)
+	aResp, _ := ag.Send(ar) // Use SandboxSend for send it to sandbox
 
 	if !aResp.CheckSign("qwdqwoidj29812d9") {
 		// ... signuture check failed, do not trust this request
@@ -84,6 +86,8 @@ import "gopkg.in/ewgra/ogone.v1"
 	if !aResp.IsOk() {
 		// ... STATUS at response is not OK
 	}
+
+	// Alias created, you can use it
 ```
 
 ## Status
