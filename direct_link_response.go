@@ -26,8 +26,6 @@ func (r *DirectLinkResponse) IsAuthorised() bool {
 
 // UnmarshalXML for parsing XML answer
 func (r *DirectLinkResponse) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-	var nodes []*DirectLinkResponse
-
 	var done bool
 
 	for !done {
@@ -36,11 +34,15 @@ func (r *DirectLinkResponse) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 		if err != nil {
 			return err
 		}
+
 		switch t := t.(type) {
 		case xml.StartElement:
 			e := &DirectLinkResponse{}
-			e.UnmarshalXML(d, t)
-			nodes = append(nodes, e)
+			err := e.UnmarshalXML(d, t)
+
+			if err != nil {
+				return err
+			}
 		case xml.EndElement:
 			done = true
 		}

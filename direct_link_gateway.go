@@ -59,10 +59,14 @@ func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayURL string)
 	}
 
 	content, err := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	closeErr := res.Body.Close()
 
 	if err != nil {
 		return nil, err
+	}
+
+	if closeErr != nil {
+		return nil, closeErr
 	}
 
 	dlResp, err := newDirectLinkResponse(string(content))
