@@ -3,7 +3,7 @@ package ogone
 import (
 	"bytes"
 	"net/http"
-"net/url"
+	"net/url"
 )
 
 // AliasGateway for sending request to Alias API
@@ -25,7 +25,7 @@ func (g *AliasGateway) SandboxSend(r *AliasRequest) (*AliasResponse, error) {
 	return g.sendRequest(r, "https://secure.ogone.com/ncol/test/alias_gateway_utf8.asp")
 }
 
-func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayUrl string) (*AliasResponse, error) {
+func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayURL string) (*AliasResponse, error) {
 
 	values := url.Values{}
 
@@ -33,7 +33,7 @@ func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayUrl string) (*AliasRe
 		values.Add(k, v)
 	}
 
-	req, err := http.NewRequest("GET", gatewayUrl+"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("GET", gatewayURL+"?"+values.Encode(), bytes.NewBufferString(""))
 
 	if err != nil {
 		return nil, err
