@@ -2,11 +2,12 @@ package ogone
 
 import "encoding/xml"
 
+// DirectLinkResponse from DirectLink request
 type DirectLinkResponse struct {
 	data map[string]string
 }
 
-func NewDirectLinkResponse(xmlContent string) (*DirectLinkResponse, error) {
+func newDirectLinkResponse(xmlContent string) (*DirectLinkResponse, error) {
 	r := &DirectLinkResponse{}
 
 	err := xml.Unmarshal([]byte(xmlContent), r)
@@ -18,11 +19,13 @@ func NewDirectLinkResponse(xmlContent string) (*DirectLinkResponse, error) {
 	return r, nil
 }
 
+// IsAuthorised for checking that payment is authorized
 func (r *DirectLinkResponse) IsAuthorised() bool {
 	return r.data["STATUS"] == "5"
 }
 
-func (e *DirectLinkResponse) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+// UnmarshalXML for parsing XML answer
+func (r *DirectLinkResponse) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	var nodes []*DirectLinkResponse
 
 	var done bool
@@ -43,10 +46,10 @@ func (e *DirectLinkResponse) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 		}
 	}
 
-	e.data = make(map[string]string, len(start.Attr))
+	r.data = make(map[string]string, len(start.Attr))
 
 	for _, attr := range start.Attr {
-		e.data[attr.Name.Local] = attr.Value
+		r.data[attr.Name.Local] = attr.Value
 	}
 
 	return nil

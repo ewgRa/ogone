@@ -39,13 +39,13 @@ import "gopkg.in/ewgra/ogone.v1"
 		SetAmount("100").
 		SetReserveOperation().
 		SetCurrency("EUR").
-		SetOrderId("ORDERID")
+		SetOrderID("ORDERID")
 
 	dlg := NewDirectLinkGateway()
 
 	dlr.
-		SetPspId("ewgraogone").
-		SetUserId("ewgragolang").
+		SetPspID("ewgraogone").
+		SetUserID("ewgragolang").
 		SetPassword("123123aa").
 		Sign("qwdqwoidj29812d9")
 
@@ -65,19 +65,19 @@ import "gopkg.in/ewgra/ogone.v1"
 	ar := NewAliasRequest()
 
 	ar.
-		SetAcceptUrl("https://github.com/ewgRa/ogone/success").
-		SetExceptionUrl("https://github.com/ewgRa/ogone/exception").
-		SetOrderId("ORDERID").
+		SetAcceptURL("https://github.com/ewgRa/ogone/success").
+		SetExceptionURL("https://github.com/ewgRa/ogone/exception").
+		SetOrderID("ORDERID").
 		SetCardNumber("4111111111111111").
 		SetCardHolderName("Sökolov Evgenii").
-		SetCvc("123").
+		SetCardCvc("123").
 		SetCardExpireMonth("01").
 		SetCardExpireYear("2020")
 
 	ag := NewAliasGateway()
 
 	ar.
-		SetPspId("ewgraogone").
+		SetPspID("ewgraogone").
 		Sign("qwdqwoidj29812d9")
 
 	aResp, _ := ag.Send(ar) // Use SandboxSend for send it to sandbox
