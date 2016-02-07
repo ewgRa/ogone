@@ -10,7 +10,6 @@ import (
 )
 
 // DirectLinkGateway for sending request to DirectLink API
-
 type DirectLinkGateway struct {
 }
 
