@@ -26,26 +26,14 @@ func (r *DirectLinkResponse) IsAuthorised() bool {
 
 // UnmarshalXML for parsing XML answer
 func (r *DirectLinkResponse) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-	var done bool
+	err := d.Skip()
 
-	for !done {
-		t, err := d.Token()
+	if err != nil {
+		return err
+	}
 
-		if err != nil {
-			return err
-		}
-
-		switch t := t.(type) {
-		case xml.StartElement:
-			e := &DirectLinkResponse{}
-			err := e.UnmarshalXML(d, t)
-
-			if err != nil {
-				return err
-			}
-		case xml.EndElement:
-			done = true
-		}
+	if start.Name.Local != "ncresponse" {
+		return nil
 	}
 
 	r.data = make(map[string]string, len(start.Attr))
