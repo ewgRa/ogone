@@ -35,7 +35,7 @@ func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayURL string)
 		values.Add(k, v)
 	}
 
-	req, err := http.NewRequest("POST", gatewayURL +"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("POST", gatewayURL+"?"+values.Encode(), bytes.NewBufferString(""))
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 

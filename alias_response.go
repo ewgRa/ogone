@@ -15,6 +15,7 @@ func newAliasResponse(redirectURL *url.URL) *AliasResponse {
 func (r *AliasResponse) Alias() string {
 	return r.redirectURL.Query().Get("Alias")
 }
+
 // Sign return SHA signature response parameter
 func (r *AliasResponse) Sign() string {
 	return r.redirectURL.Query().Get("SHASign")

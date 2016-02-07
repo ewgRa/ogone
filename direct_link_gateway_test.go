@@ -13,12 +13,12 @@ func TestDirectLink(t *testing.T) {
 	orderID := "GOLANGTEST" + time.Now().Format("20060102150405_") + strconv.Itoa(rand.Intn(100000))
 
 	ar.
-	SetAcceptURL("https://github.com/ewgRa/ogone/success").
-	SetExceptionURL("https://github.com/ewgRa/ogone/exception").
+		SetAcceptURL("https://github.com/ewgRa/ogone/success").
+		SetExceptionURL("https://github.com/ewgRa/ogone/exception").
 		SetOrderID(orderID).
 		SetCardNumber("4111111111111111").
 		SetCardHolderName("Sökolov Evgenii").
-	SetCardCVC("123").
+		SetCardCVC("123").
 		SetCardExpireMonth("01").
 		SetCardExpireYear(string(strconv.Itoa(time.Now().Year() + 1)))
 
@@ -45,13 +45,13 @@ func TestDirectLink(t *testing.T) {
 		SetAmount("100").
 		SetReserveOperation().
 		SetCurrency("EUR").
-	SetOrderID(orderID)
+		SetOrderID(orderID)
 
 	dlg := NewDirectLinkGateway()
 
 	dlr.
-	SetPspID("ewgraogone").
-	SetUserID("ewgragolang").
+		SetPspID("ewgraogone").
+		SetUserID("ewgragolang").
 		SetPassword("123123aa").
 		Sign("qwdqwoidj29812d9")
 
