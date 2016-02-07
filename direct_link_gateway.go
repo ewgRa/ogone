@@ -3,6 +3,7 @@ package ogone
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -40,6 +41,7 @@ func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayURL string)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	if err != nil {
+		fmt.Println("a")
 		return nil, err
 	}
 
