@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"fmt"
 )
 
 // DirectLinkGateway for sending request to DirectLink API
@@ -40,6 +41,7 @@ func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayURL string)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	if err != nil {
+		fmt.Println("a")
 		return nil, err
 	}
 
