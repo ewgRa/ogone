@@ -8,22 +8,26 @@ import (
 	"net/url"
 )
 
+// DirectLinkGateway for sending request to DirectLink API
 type DirectLinkGateway struct {
 }
 
+// NewDirectLinkGateway create new DirectLinkGateway
 func NewDirectLinkGateway() *DirectLinkGateway {
 	return &DirectLinkGateway{}
 }
 
+// Send for send DirectLink request to DirectLink API
 func (g *DirectLinkGateway) Send(r *DirectLinkRequest) (*DirectLinkResponse, error) {
 	return g.sendRequest(r, "https://secure.ogone.com/ncol/prod/orderdirect_utf8.asp")
 }
 
+// SandboxSend for send DirectLink request to sandbox DirectLink API
 func (g *DirectLinkGateway) SandboxSend(r *DirectLinkRequest) (*DirectLinkResponse, error) {
 	return g.sendRequest(r, "https://secure.ogone.com/ncol/test/orderdirect_utf8.asp")
 }
 
-func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayUrl string) (*DirectLinkResponse, error) {
+func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayURL string) (*DirectLinkResponse, error) {
 
 	values := url.Values{}
 
@@ -31,7 +35,7 @@ func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayUrl string)
 		values.Add(k, v)
 	}
 
-	req, err := http.NewRequest("POST", gatewayUrl+"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("POST", gatewayURL +"?"+values.Encode(), bytes.NewBufferString(""))
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
@@ -61,7 +65,7 @@ func (g *DirectLinkGateway) sendRequest(r *DirectLinkRequest, gatewayUrl string)
 		return nil, err
 	}
 
-	dlResp, err := NewDirectLinkResponse(string(content))
+	dlResp, err := newDirectLinkResponse(string(content))
 
 	if err != nil {
 		return nil, err

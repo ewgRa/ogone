@@ -1,17 +1,17 @@
 package ogone
 
-type Request interface {
+type request interface {
 	Data() map[string]string
 }
 
-type BaseRequest struct {
+type baseRequest struct {
 	data map[string]string
 }
 
-func (r *BaseRequest) Data() map[string]string {
+func (r *baseRequest) Data() map[string]string {
 	return r.data
 }
 
-func NewBaseRequest() *BaseRequest {
-	return &BaseRequest{data: make(map[string]string)}
+func newBaseRequest() *baseRequest {
+	return &baseRequest{data: make(map[string]string)}
 }

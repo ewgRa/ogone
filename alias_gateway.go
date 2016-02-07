@@ -6,22 +6,26 @@ import (
 	"net/url"
 )
 
+// AliasGateway for sending request to Alias API
 type AliasGateway struct {
 }
 
+// NewAliasGateway create new AliasGateway
 func NewAliasGateway() *AliasGateway {
 	return &AliasGateway{}
 }
 
-func (g *AliasGateway) SandboxSend(r *AliasRequest) (*AliasResponse, error) {
-	return g.sendRequest(r, "https://secure.ogone.com/ncol/test/alias_gateway_utf8.asp")
-}
-
+// Send Alias request to Alias API
 func (g *AliasGateway) Send(r *AliasRequest) (*AliasResponse, error) {
 	return g.sendRequest(r, "https://secure.ogone.com/ncol/prod/alias_gateway_utf8.asp")
 }
 
-func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayUrl string) (*AliasResponse, error) {
+// SandboxSend for send Alias request to sandbox Alias API
+func (g *AliasGateway) SandboxSend(r *AliasRequest) (*AliasResponse, error) {
+	return g.sendRequest(r, "https://secure.ogone.com/ncol/test/alias_gateway_utf8.asp")
+}
+
+func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayURL string) (*AliasResponse, error) {
 
 	values := url.Values{}
 
@@ -29,7 +33,7 @@ func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayUrl string) (*AliasRe
 		values.Add(k, v)
 	}
 
-	req, err := http.NewRequest("GET", gatewayUrl+"?"+values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("GET", gatewayURL +"?"+values.Encode(), bytes.NewBufferString(""))
 
 	if err != nil {
 		return nil, err
@@ -41,11 +45,11 @@ func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayUrl string) (*AliasRe
 		return nil, err
 	}
 
-	redirectUrl, err := res.Location()
+	redirectURL, err := res.Location()
 
 	if err != nil {
 		return nil, err
 	}
 
-	return NewAliasResponse(redirectUrl), nil
+	return newAliasResponse(redirectURL), nil
 }

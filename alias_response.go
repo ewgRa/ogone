@@ -2,30 +2,34 @@ package ogone
 
 import "net/url"
 
+// AliasResponse from alias server-to-server request
 type AliasResponse struct {
-	redirectUrl *url.URL
+	redirectURL *url.URL
 }
 
-func NewAliasResponse(redirectUrl *url.URL) *AliasResponse {
-	return &AliasResponse{redirectUrl: redirectUrl}
+func newAliasResponse(redirectURL *url.URL) *AliasResponse {
+	return &AliasResponse{redirectURL: redirectURL}
 }
 
+// Alias return alias response parameter
 func (r *AliasResponse) Alias() string {
-	return r.redirectUrl.Query().Get("Alias")
+	return r.redirectURL.Query().Get("Alias")
 }
-
+// Sign return SHA signature response parameter
 func (r *AliasResponse) Sign() string {
-	return r.redirectUrl.Query().Get("SHASign")
+	return r.redirectURL.Query().Get("SHASign")
 }
 
+// IsOk for checking that alias was created
 func (r *AliasResponse) IsOk() bool {
-	return r.redirectUrl.Query().Get("status") == "0"
+	return r.redirectURL.Query().Get("status") == "0"
 }
 
+// CheckSign for checking signature equality
 func (r *AliasResponse) CheckSign(passPhrase string) bool {
 	params := make(map[string]string)
 
-	for k, v := range r.redirectUrl.Query() {
+	for k, v := range r.redirectURL.Query() {
 		for _, iv := range v {
 			params[k] = iv
 		}
