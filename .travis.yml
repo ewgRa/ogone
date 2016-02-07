@@ -15,13 +15,17 @@ env:
   allow_failures:
     - go: tip
 
+install:
+    - go get -u github.com/golang/lint/golint
+
 branches:
   only:
     - "master"
 
 script:
   - go test -coverprofile=coverage.txt -covermode=atomic
-  - gofmt -l . | read && echo "Code differs from gofmt's style" 1>&2 && exit 1 || true
+  - gofmt -l . | (! grep . -q) || (echo "Code differs from gofmt's style" && false)
+  - find . -name "*.go" -exec golint {} \; | (! grep . -q) || (echo "Golint report some issues" && false)
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
