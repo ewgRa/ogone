@@ -3,10 +3,10 @@ package ogone
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"fmt"
 )
 
 // DirectLinkGateway for sending request to DirectLink API
