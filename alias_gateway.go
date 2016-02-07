@@ -3,7 +3,7 @@ package ogone
 import (
 	"bytes"
 	"net/http"
-	"net/url"
+"net/url"
 )
 
 // AliasGateway for sending request to Alias API
