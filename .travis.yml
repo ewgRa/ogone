@@ -31,7 +31,7 @@ script:
   - goreturns -l . | (! grep .) || (echo "goreturns detect some issues" && false)
   - errcheck ./...
   - go tool vet .
-  - find . -name "*.go" -exec golint {} \; | (! grep .) || (echo "Golint report some issues" && false)
+  - golint ./... | (! grep .) || (echo "Golint report some issues" && false)
   - go test -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
