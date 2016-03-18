@@ -10,7 +10,7 @@ import (
 func TestDirectLink(t *testing.T) {
 	orderID := "GOLANGTEST" + time.Now().Format("20060102150405_") + strconv.Itoa(rand.Intn(100000))
 
-	aResp := NewTestAliasResponse(t, orderID)
+	aResp := NewTestAliasResponse(orderID, t)
 
 	dlr := NewDirectLinkRequest()
 

@@ -33,7 +33,7 @@ func (g *AliasGateway) sendRequest(r *AliasRequest, gatewayURL string) (*AliasRe
 		values.Add(k, v)
 	}
 
-	req, err := http.NewRequest("GET", gatewayURL + "?" + values.Encode(), bytes.NewBufferString(""))
+	req, err := http.NewRequest("GET", gatewayURL+"?"+values.Encode(), bytes.NewBufferString(""))
 
 	if err != nil {
 		return nil, err
